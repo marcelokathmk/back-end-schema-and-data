@@ -1,0 +1,1 @@
+CREATE TABLE category(id integer not null, name varchar(50) NOT NULL, PRIMARY KEY (id));
