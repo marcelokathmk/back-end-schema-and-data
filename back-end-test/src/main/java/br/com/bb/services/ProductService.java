@@ -9,6 +9,7 @@ import br.com.bb.domain.Category;
 import br.com.bb.domain.Product;
 import br.com.bb.repositories.CategoryRepository;
 import br.com.bb.repositories.ProductRepository;
+import br.com.bb.services.exception.EntityNotFoundException;
 
 @Service
 public class ProductService {
@@ -21,6 +22,9 @@ public class ProductService {
 	
 	public List<Product> findByCategory(Integer categoryId){
 		Category category = categoryRepository.findOne(categoryId);
+		if	(category == null) {
+			throw new EntityNotFoundException("Categoria "+ categoryId + " não encontrada.");
+		}
 		return repository.findByCategory(category);
 	}
 }

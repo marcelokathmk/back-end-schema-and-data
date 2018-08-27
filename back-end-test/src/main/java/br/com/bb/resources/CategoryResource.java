@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,11 @@ public class CategoryResource {
 	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> findAll(){
-		List<Category> categories = service.findAll();
-		return ResponseEntity.ok().body(categories);
+		return ResponseEntity.ok().body(service.findAll());
+	}
+	
+	@RequestMapping(value = "/findByNameContaining/{letter}", method = RequestMethod.GET)
+	public ResponseEntity<Category> findByNameContaining(@PathVariable String letter){
+		return ResponseEntity.ok().body(service.findByOccurrences(letter));
 	}
 }

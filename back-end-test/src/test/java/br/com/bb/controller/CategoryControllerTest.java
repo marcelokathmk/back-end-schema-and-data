@@ -45,4 +45,34 @@ public class CategoryControllerTest {
 	        .andExpect(jsonPath("$[2].id", is(3)))
 	        .andExpect(jsonPath("$[2].name", is("Móveis")));
     }
+	
+	@Test
+	public void findByOccurrenceLetterA() throws Exception {
+		mockMvc.perform(get("/category/findByNameContaining/a"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id", is(1)))
+		.andExpect(jsonPath("$.name", is("Alimentos")));
+	}
+	
+	@Test
+	public void findByOccurrenceLetterO() throws Exception {
+		mockMvc.perform(get("/category/findByNameContaining/o"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id", is(2)))
+		.andExpect(jsonPath("$.name", is("Eletrodomésticos")));
+	}
+	
+	@Test
+	public void findByOccurrenceLetterV() throws Exception {
+		mockMvc.perform(get("/category/findByNameContaining/v"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id", is(3)))
+		.andExpect(jsonPath("$.name", is("Móveis")));
+	}
+	
+	@Test
+	public void findByOccurrenceLetterÇNotFound() throws Exception {
+		mockMvc.perform(get("/category/findByNameContaining/ç"))
+		.andExpect(status().isNotFound());
+	}
 }
