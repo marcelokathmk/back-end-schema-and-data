@@ -18,7 +18,7 @@ public class CategoryService {
 	}
 	
 	public Category findByOccurrences(String letter) {
-		Category cateogry = repository.findByNameWithOccurrenceOfLetter("%"+letter+"%", letter);
+		Category cateogry = repository.findByNameWithOccurrenceOfLetter(letter);
 		if	(cateogry == null) {
 			throw new EntityNotFoundException("Categoria com a letra "+ letter +" não encontrada.");
 		}

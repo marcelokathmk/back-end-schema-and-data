@@ -12,8 +12,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
 	@Query(value = "SELECT 	C.* "
 				 + "FROM 	Category C "
-				 + "WHERE	lower(C.NAME) LIKE CONCAT('%',:letterLike,'%') "
+				 + "WHERE	lower(C.NAME) LIKE CONCAT('%',:letter,'%') "
 				 + "ORDER BY length(lower(C.NAME)) - (length(replace(lower(C.NAME),lower(:letter),''))) DESC LIMIT 1",
 		   nativeQuery = true)
-	public Category findByNameWithOccurrenceOfLetter(@Param("letterLike") String letterLike, @Param("letter") String letter);
+	public Category findByNameWithOccurrenceOfLetter(@Param("letter") String letter);
 }
